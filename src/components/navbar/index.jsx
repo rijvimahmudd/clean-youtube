@@ -7,6 +7,7 @@ import { Container } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PlaylistForm from '../playlist-form';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Navbar = ({ getPlaylistById }) => {
 	const [open, setOpen] = useState(false);
@@ -44,9 +45,19 @@ const Navbar = ({ getPlaylistById }) => {
 								<Typography variant="body1">By Rijvi Mahmud</Typography>
 							</Link>
 						</Stack>
-						<Button variant="contained" onClick={handleClickOpen}>
-							Add Playlist
-						</Button>
+
+						<Stack flexDirection={'row'}>
+							<Button
+								href={'https://github.com/rijvimahmudd/clean-youtube'}
+								target={'_blank'}
+							>
+								<GitHubIcon></GitHubIcon>
+							</Button>
+							<Button variant="contained" onClick={handleClickOpen}>
+								Add Playlist
+							</Button>
+						</Stack>
+
 						<PlaylistForm
 							open={open}
 							handleClose={handleClose}
