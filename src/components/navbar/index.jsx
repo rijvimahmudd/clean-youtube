@@ -37,11 +37,11 @@ const Navbar = ({ getPlaylistById }) => {
 								<Typography variant="h4">Clean Youtube</Typography>
 							</Link>
 							<Link
-								href="https://stacklearner.com"
+								href="https://rijvimahmudd.showwcase.com/"
 								target={'_blank'}
 								sx={{ textDecoration: 'none', color: 'black' }}
 							>
-								<Typography variant="body1">By Stack Learner</Typography>
+								<Typography variant="body1">By Rijvi Mahmud</Typography>
 							</Link>
 						</Stack>
 						<Button variant="contained" onClick={handleClickOpen}>
