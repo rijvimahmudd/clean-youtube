@@ -1,10 +1,12 @@
-import { Button, Container, Stack } from '@mui/material';
+import { Button, Link, Stack } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { Container } from '@mui/material';
 import { useState } from 'react';
-import PlaylistForm from '../modal';
+import { Link as RouterLink } from 'react-router-dom';
+import PlaylistForm from '../playlist-form';
 
 const Navbar = ({ getPlaylistById }) => {
 	const [open, setOpen] = useState(false);
@@ -27,8 +29,20 @@ const Navbar = ({ getPlaylistById }) => {
 				<Container maxWidth={'lg'}>
 					<Toolbar>
 						<Stack sx={{ flexGrow: 1 }}>
-							<Typography variant="h4">Clean Youtube</Typography>
-							<Typography variant="body1">By Stack Learner</Typography>
+							<Link
+								to="/"
+								component={RouterLink}
+								sx={{ textDecoration: 'none', color: 'black' }}
+							>
+								<Typography variant="h4">Clean Youtube</Typography>
+							</Link>
+							<Link
+								href="https://stacklearner.com"
+								target={'_blank'}
+								sx={{ textDecoration: 'none', color: 'black' }}
+							>
+								<Typography variant="body1">By Stack Learner</Typography>
+							</Link>
 						</Stack>
 						<Button variant="contained" onClick={handleClickOpen}>
 							Add Playlist

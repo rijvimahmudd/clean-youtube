@@ -1,24 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import getPlaylist from '../api';
+import storage from '../utils/Storage';
+
+const STORAGE_KEY = 'cy__pL__L';
+
+const INIT_STATE = {
+	playlists: {},
+	recentPlaylists: [],
+	favorites: [],
+};
+
 const usePlaylists = () => {
-	const [state, setState] = useState({
-		playlists: {},
-		recentPlaylists: [],
-		favorites: [],
-	});
+	const [state, setState] = useState(INIT_STATE);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
+	useEffect(() => {
+		const state = storage.get(STORAGE_KEY);
+
+		if (state) {
+			setState({ ...state });
+		}
+	}, []);
+
+	useEffect(() => {
+		if (state !== INIT_STATE) {
+			storage.save(STORAGE_KEY, state);
+		}
+	}, [state]);
+
 	const getPlaylistById = async (playlistId, force = false) => {
 		if (state.playlists[playlistId] && !force) {
-			return state.playlists[playlistId];
+			return;
 		}
 
 		setLoading(true);
 		try {
 			const playlist = await getPlaylist(playlistId);
 			setError('');
-			setState((prev) => ({
+			setState(prev => ({
 				...prev,
 				playlists: {
 					...prev.playlists,
@@ -32,20 +52,20 @@ const usePlaylists = () => {
 		}
 	};
 
-	const addToFavorites = (playlistId) => {
-		setState((prev) => ({
+	const addToFavorites = playlistId => {
+		setState(prev => ({
 			...prev,
 			favorites: [...prev, playlistId],
 		}));
 	};
-	const addToRecent = (playlistId) => {
-		setState((prev) => ({
+	const addToRecent = playlistId => {
+		setState(prev => ({
 			...prev,
 			recentPlaylists: [...prev, playlistId],
 		}));
 	};
 	const getPlaylistsByIds = (ids = []) => {
-		return ids.map((id) => state.playlists[id]);
+		return ids.map(id => state.playlists[id]);
 	};
 	return {
 		playlists: state.playlists,
