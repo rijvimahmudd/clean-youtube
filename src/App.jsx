@@ -20,6 +20,7 @@ const HomePage = ({ playlistArray }) => {
 								playlistTitle={item.playlistTitle}
 								channelTitle={item.channelTitle}
 								playlistId={item?.playlistId}
+								channelDp={item?.channelDp?.url}
 							/>
 						</Grid>
 					))}

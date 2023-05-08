@@ -7,13 +7,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { PlayCircleOutline } from '@mui/icons-material';
-import { Box, Button, Stack } from '@mui/material';
+import { Avatar, Box, Button, Stack } from '@mui/material';
 
 const PlaylistCardItem = ({
 	playlistThumbnail,
 	playlistTitle,
 	channelTitle,
 	playlistId,
+	channelDp,
 }) => {
 	return (
 		<Card
@@ -33,10 +34,11 @@ const PlaylistCardItem = ({
 				<Typography variant="h6" color="text.primary">
 					{`${
 						playlistTitle.length > 50
-							? playlistTitle.substr(0, 50) + '...'
+							? playlistTitle.substr(0, 70) + '...'
 							: playlistTitle
 					}`}
 				</Typography>
+				<Avatar src={channelDp}></Avatar>
 				<Typography variant="body2" color="text.secondary">
 					{channelTitle}
 				</Typography>

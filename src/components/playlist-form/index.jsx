@@ -6,14 +6,27 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import isValidUrl from '../../utils/isValidUrl';
 
 const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 	const [state, setState] = useState('');
 
 	const handleSubmit = () => {
-		// TODO: handle url later
 		if (!state) {
 			alert('Invalid State');
+			return;
+		}
+
+		if (isValidUrl(state)) {
+			const url = new URL(state).searchParams;
+			const id = url.get('list');
+			if (id) getPlaylistId(id);
+			else {
+				alert('enter a valid playlist id or url');
+				return;
+			}
+			setState('');
+			handleClose();
 		} else {
 			getPlaylistId(state);
 			setState('');
@@ -36,7 +49,7 @@ const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 					label="Playlist ID or Link"
 					fullWidth
 					variant="standard"
-					onChange={(e) => setState(e.target.value)}
+					onChange={e => setState(e.target.value)}
 				/>
 			</DialogContent>
 			<DialogActions>
