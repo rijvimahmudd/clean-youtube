@@ -7,7 +7,7 @@ const recentModel = persist({
         state.items.unshift(playlistId);
         state.items = state.items.slice(0,5);
     })
-});
+}, {storage:"localStorage"});
 
 
 export default recentModel;

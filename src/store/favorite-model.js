@@ -10,7 +10,7 @@ const favoriteModel = persist({
         state.items = state.items.filter(pid => playlistId !== pid);
 
     }),
-});
+}, {storage:"localStorage"});
 
 
 export default favoriteModel;

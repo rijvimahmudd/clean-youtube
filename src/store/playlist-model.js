@@ -31,6 +31,6 @@ const playlistModel = persist({
 	})
 
 
-});
+}, {storage:"localStorage"});
 
 export default playlistModel;
