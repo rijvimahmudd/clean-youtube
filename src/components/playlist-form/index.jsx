@@ -14,20 +14,18 @@ const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 	const handleSubmit = () => {
 		if (!state) {
 			alert('Invalid State');
-			return;
-		}
-
-		if (isValidUrl(state)) {
-			const url = new URL(state).searchParams;
-			const id = url.get('list');
-			if (id) getPlaylistId(id);
-			else {
+		} else {
+			let id;
+			if (isValidUrl(state)) {
+				const url = new URL(state).searchParams;
+				id = url.get('list');
+			} else if (state.startsWith('PL')) {
+				id = state;
+			} else {
 				alert('enter a valid playlist id or url');
 				return;
 			}
-			setState('');
-			handleClose();
-		} else {
+
 			getPlaylistId(state);
 			setState('');
 			handleClose();
