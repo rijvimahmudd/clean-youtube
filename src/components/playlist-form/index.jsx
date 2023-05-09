@@ -26,7 +26,7 @@ const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 				return;
 			}
 
-			getPlaylistId(state);
+			getPlaylistId(id);
 			setState('');
 			handleClose();
 		}
