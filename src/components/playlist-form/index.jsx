@@ -17,8 +17,8 @@ const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 		} else {
 			let id;
 			if (isValidUrl(state)) {
-				const url = new URL(state).searchParams;
-				id = url.get('list');
+				const params = new URL(state).searchParams;
+				id = params.get('list');
 			} else if (state.startsWith('PL')) {
 				id = state;
 			} else {
