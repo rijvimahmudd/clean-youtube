@@ -22,7 +22,7 @@ const PlaylistForm = ({ open, handleClose, getPlaylistId }) => {
 			} else if (state.startsWith('PL')) {
 				id = state;
 			} else {
-				alert('Enter a valid Playlist id or Url');
+				alert('Enter a valid Playlist id or URL');
 				return;
 			}
 
