@@ -5,6 +5,10 @@ import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import Navbar from './components/navbar';
 import PlaylistCardItem from './components/playlist-card-item';
+import PlaylistDescription from './components/playlistDescriptionPage';
+import Player from './components/player';
+
+import YouTube from 'react-youtube';
 
 // const playlistId = 'PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl';
 
@@ -26,29 +30,6 @@ const HomePage = ({ playlistArray }) => {
 					))}
 				</Grid>
 			)}
-		</Container>
-	);
-};
-
-const PlayerPage = ({ playlists }) => {
-	const { playlistId } = useParams();
-	const current = playlists[playlistId];
-	console.log('Current Course -->', current);
-
-	return (
-		<Container maxWidth={'lg'} sx={{ my: 16 }}>
-			<Box
-				sx={{
-					height: '100%',
-					width: '100%',
-				}}
-				component={'img'}
-				src={current.playlistThumbnail.url}
-			></Box>
-			<Typography variant="h2" align="center">
-				{current.playlistTitle}
-			</Typography>
-			<Typography variant="body1">{current.playlistDescription}</Typography>
 		</Container>
 	);
 };
@@ -78,19 +59,22 @@ const App = () => {
 
 	const playlistArray = Object.values(playlistitem);
 
-	// console.log(playlists);
+	console.log('playlistItem ------>', playlistArray);
 	// console.log(error);
 
 	return (
 		<BrowserRouter>
 			<CssBaseline />
 			<Navbar getPlaylistById={playlist.getPlaylist} />
+
 			<Routes>
 				<Route
 					path="/player/:playlistId"
-					element={<PlayerPage playlists={playlistitem} />}
-				/>
+					element={<PlaylistDescription playlists={playlistitem} />}
+				></Route>
+				<Route path="/player/:playlistId/:vid" element={<Player />} />
 				<Route path="/" element={<HomePage playlistArray={playlistArray} />} />
+				<Route path="/youtube" element={<YouTube videoId={'EvedtMPYDPo'} />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
