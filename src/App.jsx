@@ -72,7 +72,7 @@ const App = () => {
 					path="/player/:playlistId"
 					element={<PlaylistDescription playlists={playlistitem} />}
 				></Route>
-				<Route path="/player/:playlistId/:vid" element={<Player />} />
+				<Route path="player/:playlistId/:vid" element={<Player />} />
 				<Route path="/" element={<HomePage playlistArray={playlistArray} />} />
 				<Route path="/youtube" element={<YouTube videoId={'EvedtMPYDPo'} />} />
 				<Route path="*" element={<NotFound />} />
