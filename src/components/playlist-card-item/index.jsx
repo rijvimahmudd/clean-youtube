@@ -3,10 +3,9 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-
-import { PlayCircleOutline } from '@mui/icons-material';
 import { Box, Button, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { ArrowRightAlt } from '@mui/icons-material';
 
 const PlaylistCardItem = ({
 	playlistThumbnail,
@@ -44,10 +43,10 @@ const PlaylistCardItem = ({
 			<CardActions disableSpacing>
 				<Button to={`/player/${playlistId}`} component={Link}>
 					<Stack direction={'row'} spacing={1} alignItems={'center'}>
-						<PlayCircleOutline />
 						<Typography variant="body2" fontWeight={600}>
-							Start Tutorial
+							Continue
 						</Typography>
+						<ArrowRightAlt></ArrowRightAlt>
 					</Stack>
 				</Button>
 			</CardActions>

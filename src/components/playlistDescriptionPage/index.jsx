@@ -1,12 +1,4 @@
-import {
-	Container,
-	Box,
-	Typography,
-	Link,
-	Stack,
-	Button,
-	Grid,
-} from '@mui/material';
+import { Container, Box, Typography, Link, Stack, Grid } from '@mui/material';
 import { nanoid } from 'nanoid';
 import { Link as rLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -16,6 +8,27 @@ const PlaylistDescription = ({ playlists }) => {
 	const current = playlists[playlistId];
 	console.log('Current Course -->', current);
 
+	function makeLinksClickable(description) {
+		const urlRegex = /(https?:\/\/[^\s]+)/g;
+		const parts = description?.split(urlRegex);
+		return parts?.map((part, index) => {
+			if (part.match(urlRegex)) {
+				return (
+					<Link
+						component={rLink}
+						to={part}
+						target="_blank"
+						underline="none"
+						key={index}
+					>
+						{part}
+					</Link>
+				);
+			} else {
+				return part;
+			}
+		});
+	}
 	return (
 		<Container maxWidth={'lg'} sx={{ my: 16 }}>
 			<Box sx={{ flexGrow: 1 }}>
@@ -57,7 +70,7 @@ const PlaylistDescription = ({ playlists }) => {
 											No description found !!
 										</Typography>
 									) : (
-										current.playlistDescription
+										makeLinksClickable(current.playlistDescription)
 									)}
 								</Typography>
 							</Box>
