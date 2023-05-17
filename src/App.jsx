@@ -8,10 +8,6 @@ import PlaylistCardItem from './components/playlist-card-item';
 import PlaylistDescription from './components/playlistDescriptionPage';
 import Player from './components/player';
 
-import YouTube from 'react-youtube';
-
-// const playlistId = 'PL_XxuZqN0xVD0op-QDEgyXFA4fRPChvkl';
-
 const HomePage = ({ playlistArray }) => {
 	return (
 		<Container maxWidth={'lg'} sx={{ my: 16 }}>
@@ -47,17 +43,17 @@ const NotFound = () => {
 const App = () => {
 	const playlist = useStoreActions(actions => actions.playlist);
 
-	const playlistitem = useStoreState(state => state.playlist.data);
+	const playlistitems = useStoreState(state => state.playlist.data);
 
 	// useEffect(() => {
 	// 	playlist.getPlaylist(playlistId);
 	// }, []);
 
 	useEffect(() => {
-		console.log(playlistitem);
+		console.log('playlistItems ', playlistitems);
 	}, []);
 
-	const playlistArray = Object.values(playlistitem);
+	const playlistArray = Object.values(playlistitems);
 
 	console.log('playlistItem ------>', playlistArray);
 	// console.log(error);
@@ -70,11 +66,15 @@ const App = () => {
 			<Routes>
 				<Route
 					path="/player/:playlistId"
-					element={<PlaylistDescription playlists={playlistitem} />}
+					element={
+						<PlaylistDescription
+							playlists={playlistitems}
+							getNewPlaylistItems={playlist.getPlaylist}
+						/>
+					}
 				></Route>
 				<Route path="player/:playlistId/:vid" element={<Player />} />
 				<Route path="/" element={<HomePage playlistArray={playlistArray} />} />
-				<Route path="/youtube" element={<YouTube videoId={'EvedtMPYDPo'} />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>

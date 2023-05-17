@@ -1,9 +1,17 @@
-import { Container, Box, Typography, Link, Stack, Grid } from '@mui/material';
+import {
+	Container,
+	Box,
+	Typography,
+	Link,
+	Stack,
+	Grid,
+	Button,
+} from '@mui/material';
 import { nanoid } from 'nanoid';
 import { Link as rLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import VideoCard from '../video-card';
-const PlaylistDescription = ({ playlists }) => {
+const PlaylistDescription = ({ playlists, getNewPlaylistItems }) => {
 	const { playlistId } = useParams();
 	const current = playlists[playlistId];
 	console.log('Current Course -->', current);
@@ -14,13 +22,7 @@ const PlaylistDescription = ({ playlists }) => {
 		return parts?.map((part, index) => {
 			if (part.match(urlRegex)) {
 				return (
-					<Link
-						component={rLink}
-						to={part}
-						target="_blank"
-						underline="none"
-						key={index}
-					>
+					<Link href={part} target="_blank" underline="none" key={index}>
 						{part}
 					</Link>
 				);
@@ -77,6 +79,14 @@ const PlaylistDescription = ({ playlists }) => {
 						</Stack>
 					</Grid>
 					<Grid item xs={6}>
+						<Button
+							sx={{ margin: 5 }}
+							onClick={() => {
+								getNewPlaylistItems(playlistId, true);
+							}}
+						>
+							Refresh
+						</Button>
 						{current.playlistItems.map(item => {
 							return (
 								<Link

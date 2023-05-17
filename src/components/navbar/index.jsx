@@ -21,7 +21,7 @@ const Navbar = ({ getPlaylistById }) => {
 	};
 
 	const getPlaylistId = playlistId => {
-		getPlaylistById(playlistId);
+		getPlaylistById({ playlistId });
 	};
 
 	return (
