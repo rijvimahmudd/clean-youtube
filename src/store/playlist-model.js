@@ -15,8 +15,8 @@ const playlistModel = persist({
 		state.error = payload;
 	}),
 
-	getPlaylist: thunk(async({addPlaylist, setLoading, setError}, {playlistId, forced = false}, {getState})=>{
-		if(getState().data[playlistId] && !forced) return;
+	getPlaylist: thunk(async({addPlaylist, setLoading, setError}, {playlistId, refresh = false}, {getState})=>{
+		if(getState().data[playlistId] && !refresh) return;
 		setLoading(true);
 		try {
 			const playlist =  await getPlaylist(playlistId);

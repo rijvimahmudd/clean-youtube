@@ -82,7 +82,9 @@ const PlaylistDescription = ({ playlists, getNewPlaylistItems }) => {
 						<Button
 							sx={{ margin: 5 }}
 							onClick={() => {
-								getNewPlaylistItems(playlistId, true);
+								if (playlistId) {
+									getNewPlaylistItems({ playlistId, refresh: true });
+								}
 							}}
 						>
 							Refresh
