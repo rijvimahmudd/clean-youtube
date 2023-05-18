@@ -66,14 +66,9 @@ const PlaylistDescription = ({ playlists, getNewPlaylistItems }) => {
 									}}
 									lineHeight={1.4}
 								>
-									{current.playlistDescription === '' ? (
-										<Typography variant="h5">
-											{' '}
-											No description found !!
-										</Typography>
-									) : (
-										makeLinksClickable(current.playlistDescription)
-									)}
+									{current.playlistDescription === ''
+										? 'No description found !!'
+										: makeLinksClickable(current.playlistDescription)}
 								</Typography>
 							</Box>
 						</Stack>
